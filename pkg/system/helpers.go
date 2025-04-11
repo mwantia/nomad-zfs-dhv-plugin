@@ -38,3 +38,25 @@ func IsExecutable(path string) bool {
 
 	return !info.IsDir() && (info.Mode()&0o111 != 0)
 }
+
+func FormatBytes(size int64) string {
+	const (
+		KB = 1024
+		MB = KB * 1024
+		GB = MB * 1024
+		TB = GB * 1024
+	)
+
+	switch {
+	case size%TB == 0:
+		return fmt.Sprintf("%dT", size/TB)
+	case size%GB == 0:
+		return fmt.Sprintf("%dG", size/GB)
+	case size%MB == 0:
+		return fmt.Sprintf("%dM", size/MB)
+	case size%KB == 0:
+		return fmt.Sprintf("%dK", size/KB)
+	default:
+		return fmt.Sprintf("%dB", size)
+	}
+}

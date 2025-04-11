@@ -28,8 +28,8 @@ type DynamicHostVolumeConfig struct {
 	NodePool   string `mapstructure:"NODE_POOL"`
 	Parameters string `mapstructure:"DHV_PARAMETERS"`
 
-	CapacityMinBytes string `mapstructure:"CAPACITY_MIN_BYTES"`
-	CapacityMaxBytes string `mapstructure:"CAPACITY_MAX_BYTES"`
+	CapacityMinBytes int64 `mapstructure:"CAPACITY_MIN_BYTES"`
+	CapacityMaxBytes int64 `mapstructure:"CAPACITY_MAX_BYTES"`
 
 	CreatedPath string `mapstructure:"CREATED_PATH"`
 }
@@ -87,8 +87,8 @@ func newDefault() DynamicHostVolumeConfig {
 
 		Parameters: "{}",
 
-		CapacityMinBytes: "",
-		CapacityMaxBytes: "",
+		CapacityMinBytes: -1,
+		CapacityMaxBytes: 0,
 
 		CreatedPath: "",
 	}

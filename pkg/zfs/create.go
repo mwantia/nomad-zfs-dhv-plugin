@@ -2,8 +2,10 @@ package zfs
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/mwantia/nomad-zfs-dhv-plugin/pkg/config"
 	"github.com/mwantia/nomad-zfs-dhv-plugin/pkg/system"
@@ -38,6 +40,8 @@ func CreateVolume(mount, path, quota string, params config.DynamicHostVolumePara
 
 	cmd := exec.Command(zfs, args...)
 	cmd.Stderr = os.Stderr
+
+	log.Printf("Creating zfs dataset with command: zfs %s", strings.Join(args, " "))
 
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("failed to create zfs dataset: %w", err)
